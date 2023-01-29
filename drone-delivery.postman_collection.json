@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "180bba9a-e64a-422d-b82a-39024796e3f2",
+		"name": "drone-delivery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5342607"
+	},
+	"item": [
+		{
+			"name": "register-drone",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Correlation-ConversationID",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serialNumber\":\"0C69TKC3EI\",\n    \"model\":\"MIDDLEWEIGHT\",\n    \"weightLimit\":190,\n    \"batteryCapacity\":10,\n    \"state\":\"IDLE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/drones/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drones",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check-battery-level",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Correlation-ConversationID",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/drones/63d690b43be76372edacba5f/battery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drones",
+						"63d690b43be76372edacba5f",
+						"battery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check-available-drones",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Correlation-ConversationID",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/drones/available?weight=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drones",
+						"available"
+					],
+					"query": [
+						{
+							"key": "weight",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "load-drone",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Correlation-ConversationID",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\": \"Test Medication\",\n        \"weight\": 5,\n        \"code\": \"0C69TKC3EI\",\n        \"image\": \"your-path-to-image\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/drones/63d693986e1d5f37d85c50f3/load",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drones",
+						"63d693986e1d5f37d85c50f3",
+						"load"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check-drone-load",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Correlation-ConversationID",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/drones/63d693986e1d5f37d85c50f3/load",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"drones",
+						"63d693986e1d5f37d85c50f3",
+						"load"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
