@@ -7,65 +7,37 @@
 :scroll: **START**
 
 
-### Introduction
+### Running MongoDB on Docker
 
-There is a major new technology that is destined to be a disruptive force in the field of transportation: **the droneDTO**. Just as the mobile phone allowed developing countries to leapfrog older technologies for personal communication, the droneDTO has the potential to leapfrog traditional transportation infrastructure.
-
-Useful droneDTO functions include delivery of small items that are (urgently) needed in locations with difficult access.
-
----
-
-### Task description
-
-We have a fleet of **10 drones**. A droneDTO is capable of carrying devices, other than cameras, and capable of delivering small loads. For our use case **the load is medications**.
-
-A **Drone** has:
-- serial number (100 characters max);
-- model (Lightweight, Middleweight, Cruiserweight, Heavyweight);
-- weight limit (500gr max);
-- battery capacity (percentage);
-- state (IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING).
-
-Each **Medication** has: 
-- name (allowed only letters, numbers, ‘-‘, ‘_’);
-- weight;
-- code (allowed only upper case letters, underscore and numbers);
-- image (picture of the medication case).
-
-Develop a service via REST API that allows clients to communicate with the drones (i.e. **dispatch controller**). The specific communicaiton with the droneDTO is outside the scope of this task. 
-
-The service should allow:
-- registering a droneDTO;
-- loading a droneDTO with medication items;
-- checking loaded medication items for a given droneDTO; 
-- checking available drones for loading;
-- check droneDTO battery level for a given droneDTO;
-
-> Feel free to make assumptions for the design approach. 
+- Make sure that you have Docker installed on your machine.
+- Open a terminal and run the command **docker pull mongo**. This will download the latest version of MongoDB.
+- Run the command **docker run -d -p 27017:27017 --name mongodb mongo**. This will start a MongoDB container and map the container's port 27017 to the host's port 27017.
+- Verify that the container is running by running the command **docker ps**. You should see the mongodb container in the list of running containers.
 
 ---
 
-### Requirements
+### Configuring Spring Boot with MongoDB
 
-While implementing your solution **please take care of the following requirements**: 
-
-#### Functional requirements
-
-- There is no need for UI;
-- Prevent the droneDTO from being loaded with more weight that it can carry;
-- Prevent the droneDTO from being in LOADING state if the battery level is **below 25%**;
-- Introduce a periodic task to check drones battery levels and create history/audit event log for this.
+- In the application properties file (application.properties or application.yml), add the MongoDB configurations.
 
 ---
 
-#### Non-functional requirements
+### Running the Application
 
-- Input/output data must be in JSON format;
-- Your project must be buildable and runnable;
-- Your project must have a README file with build/run/test instructions (use DB that can be run locally, e.g. in-memory, via container);
-- Required data must be preloaded in the database.
-- JUnit tests are optional but advisable (if you have time);
-- Advice: Show us how you work through your commit history.
+- Make sure that the MongoDB container is running.
+- Run the command **mvn clean install** to build the application.
+- Run the command **mvn spring-boot:run** to start the application.
+- The application should now be running and connected to the MongoDB container.
+- Use **http://localhost:8080/** as the base url.
+- You can now interact with the application and test its functionality.
+
+---
+
+#### Testing the Application
+
+- Run the command **mvn test** to run the JUnit tests for the application.
+- The tests will run and check the functionality of the application.
+- You can also use a tool like Postman to test the REST endpoints of the application.
 
 ---
 
